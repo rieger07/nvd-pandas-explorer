@@ -9,8 +9,10 @@ LOGGER = logging.getLogger()
 
 def load_files(folder):
     vulnerabilities = list()
-    for root, dirnames, files in os.walk(folder):
+    for root, _, files in os.walk(folder):
         for _file in files:
+            if ".json" not in _file:
+                continue
             file_path = os.path.join(root, _file)
             with open(file_path, "r", encoding="utf-8") as f:
                 temp = json.load(f)
